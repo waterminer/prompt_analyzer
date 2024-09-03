@@ -227,8 +227,9 @@ with gr.Blocks(head=head) as app:
 if __name__ == "__main__":
     try:
         with Repo(".") as repo:
-            print("initializing database...")
+            print("Initializing database...")
             repo.submodule_update(init=True)
     except Exception as e:
-        print(f"initializing database failed!\n{e}")
+        print(f"Database initialization failed!\n{e}")
+        
     app.launch()
