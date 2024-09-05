@@ -261,7 +261,7 @@ with gr.Blocks(head=head) as app:
                 with gr.Column() as image_tools_left_colum:
                     image = gr.Image(type="pil", height="512px")
                 with gr.Column() as image_tools_right_colum:
-                    image_meta = gr.Text("图片信息")
+                    image_meta = gr.TextArea(label="图片信息",lines=19,max_lines=19)
                     image_meta_state = gr.State()
                     send_to_prompt_analyzer_button = gr.Button("发送到分析工具")
 
@@ -270,21 +270,22 @@ with gr.Blocks(head=head) as app:
                 metadata = read_image_info(image)
                 if not metadata:
                     return "没有获取到图片的生成信息", ""
-                res = f"""
-prompt:{metadata.prompt}
-negative_prompt:{metadata.negative_prompt}
+                res = f"""prompt:
+{metadata.prompt}
 
+negative_prompt:
+{metadata.negative_prompt}
 """
                 if metadata.steps:
-                    res += f"steps:{metadata.steps}"
+                    res += f"\nsteps: {metadata.steps}\n"
                 if metadata.resolution:
                     res += (
-                        f"resolution:{metadata.resolution[0]}x{metadata.resolution[1]}"
+                        f"\nresolution: {metadata.resolution[0]}x{metadata.resolution[1]}\n"
                     )
                 if metadata.seed:
-                    res += f"seed:{metadata.seed}"
+                    res += f"\nseed: {metadata.seed}\n"
                 if metadata.sampler:
-                    res += f"sampler:{metadata.sampler}"
+                    res += f"\nsampler: {metadata.sampler}\n"
                 return res, metadata.prompt
 
             @send_to_prompt_analyzer_button.click(
