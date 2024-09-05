@@ -193,7 +193,7 @@ def onload():
                 character = [("original",1.0)]
             general_label = [label[0] for label in general]
             character_label = [label[0] for label in character]
-            text = ",".join(character_label)+"\n"+",".join(general_label)
+            text = ",".join(character_label)+","+",".join(general_label)
             return f"反推标签:\n{text}",text,dict(rating),dict(character),dict(general)
         
     except ImportError as e:
