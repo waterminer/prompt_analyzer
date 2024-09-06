@@ -84,6 +84,7 @@ class Tagger:
     @_model_loaded
     def inference(self, image: Image.Image):
         img = self.preprocess_image(image)
+        img = img[:,:,::-1] #RGB->BGR
         img = np.expand_dims(img, axis=0)
         input_name = self._model.get_inputs()[0].name
         label_name = self._model.get_outputs()[0].name
