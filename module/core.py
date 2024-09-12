@@ -166,9 +166,7 @@ def webui_prompt_parser(string_iter: Iterator, bracket_flag=None) -> list[_Tag]:
                 bracket()
             case "[":
                 square_brackets()
-            case char if (bracket_flag == "(" and char == ")") or (
-                bracket_flag == "[" and char == "]"
-            ):
+            case char if char == ")" or char == "]":
                 if uncombined_character:
                     if uncombined_character[-1] == "\\":
                         uncombined_character[-1] = character
@@ -181,6 +179,8 @@ def webui_prompt_parser(string_iter: Iterator, bracket_flag=None) -> list[_Tag]:
                 elif bracket_flag == "[":
                     res = [tag.set_weight(tag.weight * 0.9) for tag in res]
                     return res
+                else:
+                    raise UnmatchedBracketError("语法错误，请检查括号匹配情况")
             case ",":
                 combine_character()
             case _:
