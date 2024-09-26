@@ -18,7 +18,7 @@
 自动标记功能需要安装onnx运行时onnxruntime(ORT)才能正常运行，这部分考虑到不同运行环境的差异需要自行手动安装
 
 ```bash
-./venv/Scripts/pip #激活虚拟环境
+./venv/Scripts/activate #激活虚拟环境
 pip install onnxruntime
 ```
 
